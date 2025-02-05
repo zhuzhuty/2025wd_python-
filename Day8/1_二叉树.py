@@ -11,19 +11,6 @@ class Node:
         self.rchild = rchild
 
 
-def level_order(node: Node):
-    if node is None:
-        return
-    levelqueue = [node]
-    while levelqueue:
-        temp_node = levelqueue.pop(0)
-        print(temp_node.elem, end=' ')
-        if temp_node.lchild is not None:
-            levelqueue.append(temp_node.lchild)
-        if temp_node.rchild is not None:
-            levelqueue.append(temp_node.rchild)
-
-
 class BTree:
     def __init__(self):
         self.root = None
@@ -64,6 +51,16 @@ class BTree:
         self.post_order(node.rchild)
         print(node.elem, end=' ')
 
+    def level_order(self):
+        help_queue = [self.root]
+        while help_queue:
+            father_node = help_queue.pop(0)
+            print(father_node.elem, end=' ')
+            if father_node.lchild is not None:
+                help_queue.append(father_node.lchild)
+            if father_node.rchild is not None:
+                help_queue.append(father_node.rchild)
+
 
 if __name__ == '__main__':
     tree = BTree()
@@ -78,4 +75,4 @@ if __name__ == '__main__':
     print()
     tree.post_order(tree.root)
     print()
-    level_order(tree.root)
+    tree.level_order()
